@@ -51,8 +51,9 @@ func NewHandlerTransaction(ctx context.Context) *HandlerTransaction {
 	ht := &HandlerTransaction{
 		parent: ctx,
 	}
-	ctx = context.WithValue(ctx, hTransactionKey{}, ht)
-	ht.Context = ctx
+	//ctx = context.WithValue(ctx, hTransactionKey{}, ht)
+	//ht.Context = ctx
+	ht.Context = context.WithValue(ctx, hTransactionKey{}, ht)
 	return ht
 }
 
