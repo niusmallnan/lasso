@@ -110,6 +110,10 @@ func (s *sharedController) RegisterHandler(ctx context.Context, name string, han
 	// Ensure that controller is initialized
 	c := s.initController()
 
+	if strings.Contains(name, "role-revision-indexer") {
+		logrus.Infof("^^^^^^^^^^^^^ getHandlerTransaction: %+v", getHandlerTransaction(ctx))
+	}
+
 	getHandlerTransaction(ctx).do(func() {
 		if strings.Contains(name, "role-revision-indexer") {
 			logrus.Infof("^^^^^^^^^^^^^ Add todo func to HandlerTransaction: %s", name)
