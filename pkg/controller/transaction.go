@@ -3,6 +3,8 @@ package controller
 import (
 	"context"
 	"sync"
+
+	"github.com/sirupsen/logrus"
 )
 
 type hTransactionKey struct{}
@@ -17,6 +19,7 @@ type HandlerTransaction struct {
 
 func (h *HandlerTransaction) do(f func()) {
 	if h == nil {
+		logrus.Info("^^^^^^^^^^^^^ Nill HandlerTransaction ^^^^^^^^^^^^^")
 		f()
 		return
 	}

@@ -2,11 +2,13 @@ package controller
 
 import (
 	"context"
+	"strings"
 	"sync"
 	"time"
 
 	"github.com/rancher/lasso/pkg/cache"
 	"github.com/rancher/lasso/pkg/client"
+	"github.com/sirupsen/logrus"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	cachetools "k8s.io/client-go/tools/cache"
@@ -109,6 +111,9 @@ func (s *sharedController) RegisterHandler(ctx context.Context, name string, han
 	c := s.initController()
 
 	getHandlerTransaction(ctx).do(func() {
+		if strings.Contains(name, "role-revision-indexer") {
+			logrus.Infof("^^^^^^^^^^^^^ Add todo func to HandlerTransaction: %s", name)
+		}
 		s.handler.Register(ctx, name, handler)
 
 		s.startLock.Lock()
